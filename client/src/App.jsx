@@ -1,12 +1,12 @@
 import React from 'react'
 
-
 const App = () => {
   return (
-    <div classname=''>
-      <h1>HEllo</h1>
+    <div className="text-red-500 text-4xl font-bold">
+      Hello
     </div>
   )
 }
 
 export default App
+
