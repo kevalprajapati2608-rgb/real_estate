@@ -1,0 +1,29 @@
+{
+  "name": "real-estate-web-codes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevalprajapati2608-rgb/real_estate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevalprajapati2608-rgb/real_estate/issues"
+  },
+  "homepage": "https://github.com/kevalprajapati2608-rgb/real_estate#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.2",
+    "nodemon": "^3.1.11"
+  }
+}
