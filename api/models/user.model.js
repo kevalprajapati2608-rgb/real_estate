@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema(
     ref: "Listing",
   },
 ],
+isAdmin: {
+  type: Boolean,
+  default: false,
+},
+
 
   },
   { timestamps: true }

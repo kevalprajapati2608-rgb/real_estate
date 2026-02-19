@@ -135,16 +135,40 @@ const UpdateListing = () => {
   placeholder="Bathrooms"
   className="border p-3 rounded"
 />
-<select
-  id="type"
-  value={formData.type || ""}
-  onChange={handleChange}
-  className="border p-3 rounded"
->
-  <option value="">Select Type</option>
-  <option value="rent">Rent</option>
-  <option value="sale">Sale</option>
-</select>
+<div className="flex gap-6 flex-wrap">
+  <label className="flex items-center gap-2">
+    <input
+      type="checkbox"
+      id="sale"
+      checked={formData.sale || false}
+      onChange={(e) =>
+        setFormData({
+          ...formData,
+          sale: e.target.checked,
+          rent: false, // only one allowed
+        })
+      }
+    />
+    Sale
+  </label>
+
+  <label className="flex items-center gap-2">
+    <input
+      type="checkbox"
+      id="rent"
+      checked={formData.rent || false}
+      onChange={(e) =>
+        setFormData({
+          ...formData,
+          rent: e.target.checked,
+          sale: false, // only one allowed
+        })
+      }
+    />
+    Rent
+  </label>
+</div>
+
 <label className="flex items-center gap-2">
   <input
     type="checkbox"

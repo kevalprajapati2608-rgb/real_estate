@@ -34,6 +34,8 @@ router.get("/:id", async (req, res) => {
 });
 router.get("/", async (req, res) => {
   try {
+    console.log("QUERY RECEIVED:", req.query);
+
     const {
       searchTerm,
       type,
@@ -49,8 +51,12 @@ router.get("/", async (req, res) => {
       query.name = { $regex: searchTerm, $options: "i" };
     }
 
-    if (type && type !== "all") {
-      query.type = type;
+    if (type === "rent") {
+      query.rent = true;
+    }
+
+    if (type === "sale") {
+      query.sale = true;
     }
 
     if (minPrice || maxPrice) {
@@ -59,12 +65,16 @@ router.get("/", async (req, res) => {
       if (maxPrice) query.regularPrice.$lte = Number(maxPrice);
     }
 
+    console.log("MONGO QUERY:", query);
+
     const listings = await Listing.find(query).sort({
       [sort]: order === "asc" ? 1 : -1,
     });
 
     res.status(200).json(listings);
+
   } catch (error) {
+    console.log("SERVER ERROR:", error);
     res.status(500).json({ message: error.message });
   }
 });

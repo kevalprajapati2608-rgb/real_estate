@@ -62,12 +62,13 @@ export const getUserListings = async (req, res, next) => {
 export const toggleWishlist = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
-
     const listingId = req.params.listingId;
 
-    const alreadySaved = user.wishlist.includes(listingId);
+    const exists = user.wishlist.some(
+      (id) => id.toString() === listingId
+    );
 
-    if (alreadySaved) {
+    if (exists) {
       user.wishlist = user.wishlist.filter(
         (id) => id.toString() !== listingId
       );
@@ -77,16 +78,56 @@ export const toggleWishlist = async (req, res, next) => {
 
     await user.save();
 
+    // ✅ return updated wishlist
     res.status(200).json(user.wishlist);
+
   } catch (err) {
     next(err);
   }
 };
-export const getWishlist = async (req, res, next) => {
+
+
+
+export const getWishlist = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate("wishlist");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // ✅ ALWAYS send array directly
     res.status(200).json(user.wishlist);
-  } catch (err) {
-    next(err);
+
+  } catch (error) {
+    console.log("WISHLIST ERROR:", error);
+    res.status(500).json({ message: error.message });
   }
 };
+
+export const contactOwner = async (req, res, next) => {
+  try {
+    const { message, phone } = req.body;
+
+    const listing = await Listing.findById(req.params.listingId).populate("userRef");
+
+    if (!listing) {
+      return res.status(404).json({ message: "Listing not found" });
+    }
+
+    // 🔥 For now we just return success
+    // later you can send email / save to DB
+
+    res.status(200).json({
+      success: true,
+      ownerEmail: listing.userRef.email,
+      message: "Message sent to owner",
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+

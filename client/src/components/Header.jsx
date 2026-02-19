@@ -25,23 +25,21 @@ const navigate = useNavigate();
         <form
   onSubmit={(e) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/?searchTerm=${searchTerm}`);
-    }
+    if (searchTerm.trim() === "") return;
+    navigate(`/?searchTerm=${searchTerm}`);
   }}
-  className="bg-white px-4 py-2 rounded-full flex items-center shadow-md transition-all duration-300 focus-within:shadow-xl focus-within:scale-105"
+  className="bg-slate-100 p-3 rounded-lg flex items-center"
 >
   <input
     type="text"
     placeholder="Search properties..."
+    className="bg-transparent focus:outline-none w-24 sm:w-64"
     value={searchTerm}
     onChange={(e) => setSearchTerm(e.target.value)}
-    className="bg-transparent focus:outline-none w-24 sm:w-64 transition-all duration-300"
   />
-  <button type="submit">
-    <FaSearch className="text-slate-600 hover:text-blue-600 transition" />
-  </button>
+  <FaSearch className="text-slate-600 cursor-pointer" />
 </form>
+
 
 
         <ul className="flex gap-4">

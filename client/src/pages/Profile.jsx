@@ -34,17 +34,33 @@ const navigate = useNavigate();
 
   console.log(formData);
 
-  const fetchWishlist = async () => {
-  const res = await fetch("/api/user/wishlist", {
-    credentials: "include",
-  });
-  const data = await res.json();
-  setWishlist(data);
-};
+ 
 
 useEffect(() => {
+  const fetchWishlist = async () => {
+    try {
+      const res = await fetch("/api/user/wishlist", {
+        credentials: "include",
+      });
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      console.log("WISHLIST DATA:", data);
+
+      setWishlist(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   fetchWishlist();
 }, []);
+
+
+console.log("WISHLIST DATA:", wishlist);
+
 
 
   const handleChange = (e) => {
@@ -148,26 +164,31 @@ useEffect(() => {
     <div className="p-3 max-w-lg mx-auto ">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
       <form onSubmit={handleSubmit} className=" flex flex-col gap-4">
-        <h2 className=" text-2xl mt-8 mb-4">My Wishlist ❤️</h2>
+       {wishlist.length > 0 && (
+  <div className="mt-8">
+    <h2 className="text-xl font-semibold mb-4">My Wishlist</h2>
 
-{wishlist.length === 0 && (
-  
-  <p>No saved properties yet.</p>
+    <div className="grid md:grid-cols-2 gap-4">
+      {wishlist.map((listing) => (
+        <Link
+  key={listing._id}
+  to={`/listing/${listing._id}`}
+  className="border p-3 rounded-lg shadow hover:shadow-lg transition"
+>
+          <img
+            src={`http://localhost:3000/uploads/${listing.images?.[0]}`}
+            className="h-32 w-full object-cover rounded"
+          />
+          <h3 className="mt-2 font-semibold">{listing.name}</h3>
+          <p className="text-sm text-gray-500">
+            ₹ {listing.regularPrice}
+          </p>
+        </Link>
+      ))}
+    </div>
+  </div>
 )}
 
-<div className="grid sm:grid-cols-2 gap-6">
-  {wishlist.map((listing) => (
-    
-    <div key={listing._id} className="bg-white p-4 rounded-xl shadow">
-      <img
-        src={`http://localhost:3000/uploads/${listing.images[0]}`}
-        className="h-40 w-full object-cover rounded"
-      />
-      <h3 className="mt-2 font-semibold">{listing.name}</h3>
-      <p>₹ {listing.regularPrice}</p>
-    </div>
-  ))}
-</div>
 
         <input type="file" accept="image/*" ref={fileRef} hidden />
         <img

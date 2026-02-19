@@ -10,8 +10,8 @@ import CreateListing from "./pages/CreateListing";
 import MyListings from "./pages/MyLIstings";
 import UpdateListing from "./components/UpdateListings";
 import ListingDetail from "./pages/ListingDetail";
-
-
+import AdminRoute from "./components/AdminRoute";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const App = () => {
   return (
@@ -27,12 +27,19 @@ const App = () => {
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/my-listings" element={<MyListings />} />
           <Route path="/update-listing/:id" element={<UpdateListing />} />
-
         </Route>
         <Route path="/listing/:id" element={<ListingDetail />} />
         <Route path="/update-listing/:id" element={<UpdateListing />} />
-
+        <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        }
+      />
       </Routes>
+      
     </BrowserRouter>
   );
 };

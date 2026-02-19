@@ -4,6 +4,9 @@ import { verifyToken } from "../utils/verifyUser.js";
 import { getUserListings } from "../controllers/user.controller.js";
 import { updateListing } from "../controllers/listing.controller.js";
 import { toggleWishlist, getWishlist } from "../controllers/user.controller.js";
+import { contactOwner } from "../controllers/user.controller.js";
+
+
 
 
 
@@ -18,6 +21,7 @@ router.get("/get/:id", verifyToken, getUserListings);
 router.put("/update/:id", verifyToken, updateListing);
 router.get("/wishlist", verifyToken, getWishlist);
 router.put("/wishlist/:listingId", verifyToken, toggleWishlist);
+router.post("/contact/:listingId", verifyToken, contactOwner);
 
 
 export default router;
