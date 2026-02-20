@@ -69,208 +69,205 @@ const UpdateListing = () => {
   }
 };
 
+return (
+  <div className="min-h-screen bg-[#9eafb4] py-10 px-4">
+    <div className="max-w-6xl mx-auto">
 
-  return (
-    <div className="p-6 max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Update Listing</h1>
+      {/* HEADER */}
+      <div className="mb-10 text-center">
+        <h1 className="text-4xl font-bold text-800 mb-2">
+          ✏️ Update Property
+        </h1>
+        <p className="text-slate-800">
+          Update your listing details professionally
+        </p>
+      </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {/* MAIN CARD */}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-[#d9dadd] border border-slate-700 rounded-3xl shadow-2xl p-8 space-y-8"
+      >
 
-        <input
-          type="text"
-          id="name"
-          value={formData.name || ""}
-          onChange={handleChange}
-          placeholder="Name"
-          className="border p-3 rounded"
-        />
+        {/* GRID FIELDS */}
+        <div className="grid md:grid-cols-2 gap-6">
 
+          <input
+            type="text"
+            id="name"
+            value={formData.name || ""}
+            onChange={handleChange}
+            placeholder="Property Name"
+            className="input-pro"
+          />
+
+          <input
+            type="text"
+            id="address"
+            value={formData.address || ""}
+            onChange={handleChange}
+            placeholder="Address"
+            className="input-pro"
+          />
+
+          <input
+            type="number"
+            id="regularPrice"
+            value={formData.regularPrice || ""}
+            onChange={handleChange}
+            placeholder="Regular Price"
+            className="input-pro"
+          />
+
+          <input
+            type="number"
+            id="discountPrice"
+            value={formData.discountPrice || ""}
+            onChange={handleChange}
+            placeholder="Discount Price"
+            className="input-pro"
+          />
+
+          <input
+            type="number"
+            id="bedrooms"
+            value={formData.bedrooms || ""}
+            onChange={handleChange}
+            placeholder="Bedrooms"
+            className="input-pro"
+          />
+
+          <input
+            type="number"
+            id="bathrooms"
+            value={formData.bathrooms || ""}
+            onChange={handleChange}
+            placeholder="Bathrooms"
+            className="input-pro"
+          />
+        </div>
+
+        {/* DESCRIPTION */}
         <textarea
           id="description"
           value={formData.description || ""}
           onChange={handleChange}
-          placeholder="Description"
-          className="border p-3 rounded"
+          placeholder="Property Description"
+          className="input-pro h-32"
         />
 
-        <input
-          type="text"
-          id="address"
-          value={formData.address || ""}
-          onChange={handleChange}
-          placeholder="Address"
-          className="border p-3 rounded"
-        />
+        {/* CHECKBOXES */}
+        <div className="flex flex-wrap gap-6 bg-slate-800/60 p-5 rounded-2xl border border-slate-700">
 
-        <input
-          type="number"
-          id="regularPrice"
-          value={formData.regularPrice || ""}
-          onChange={handleChange}
-          placeholder="Price"
-          className="border p-3 rounded"
-        />
-        <input
-  type="number"
-  id="discountPrice"
-  value={formData.discountPrice || ""}
-  onChange={handleChange}
-  placeholder="Discount Price"
-  className="border p-3 rounded"
-  required="false"
-/>
-<input
-  type="number"
-  id="bedrooms"
-  value={formData.bedrooms || ""}
-  onChange={handleChange}
-  placeholder="Bedrooms"
-  className="border p-3 rounded"
-/>
-<input
-  type="number"
-  id="bathrooms"
-  value={formData.bathrooms || ""}
-  onChange={handleChange}
-  placeholder="Bathrooms"
-  className="border p-3 rounded"
-/>
-<div className="flex gap-6 flex-wrap">
-  <label className="flex items-center gap-2">
-    <input
-      type="checkbox"
-      id="sale"
-      checked={formData.sale || false}
-      onChange={(e) =>
-        setFormData({
-          ...formData,
-          sale: e.target.checked,
-          rent: false, // only one allowed
-        })
-      }
-    />
-    Sale
-  </label>
+          <label className="check-pro">
+            <input
+              type="checkbox"
+              checked={formData.sale || false}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  sale: e.target.checked,
+                  rent: false,
+                })
+              }
+            />
+            🏷 Sale
+          </label>
 
-  <label className="flex items-center gap-2">
-    <input
-      type="checkbox"
-      id="rent"
-      checked={formData.rent || false}
-      onChange={(e) =>
-        setFormData({
-          ...formData,
-          rent: e.target.checked,
-          sale: false, // only one allowed
-        })
-      }
-    />
-    Rent
-  </label>
-</div>
+          <label className="check-pro">
+            <input
+              type="checkbox"
+              checked={formData.rent || false}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  rent: e.target.checked,
+                  sale: false,
+                })
+              }
+            />
+            🏠 Rent
+          </label>
 
-<label className="flex items-center gap-2">
-  <input
-    type="checkbox"
-    id="furnished"
-    checked={formData.furnished || false}
-    onChange={handleChange}
-  />
-  Furnished
-</label>
-<label className="flex items-center gap-2">
-  <input
-    type="checkbox"
-    id="parking"
-    checked={formData.parking || false}
-    onChange={handleChange}
-  />
-  Parking
-</label>
+          <label className="check-pro">
+            <input
+              type="checkbox"
+              id="furnished"
+              checked={formData.furnished || false}
+              onChange={handleChange}
+            />
+            🛋 Furnished
+          </label>
 
-
-        {/* Old Images */}
-        <div className="flex gap-2 flex-wrap">
-          {formData.images?.map((img, index) => (
-            <div key={index} className="relative">
-              <img
-                src={`http://localhost:3000/uploads/${img}`}
-                className="w-24 h-20 object-cover rounded"
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  setFormData({
-                    ...formData,
-                    images: formData.images.filter((_, i) => i !== index),
-                  })
-                }
-                className="absolute top-0 right-0 bg-red-500 text-white px-1"
-              >
-                X
-              </button>
-            </div>
-          ))}
+          <label className="check-pro">
+            <input
+              type="checkbox"
+              id="parking"
+              checked={formData.parking || false}
+              onChange={handleChange}
+            />
+            🚗 Parking
+          </label>
         </div>
 
-        {/*New image Preview*/}
-        <div className="flex flex-wrap gap-4 mt-4">
+        {/* OLD IMAGES */}
+        <div>
+          <h3 className="text-white font-semibold mb-4">
+            Existing Images
+          </h3>
 
-  {newFiles.map((file, index) => {
-    const previewUrl = URL.createObjectURL(file);
+          <div className="flex flex-wrap gap-4">
+            {formData.images?.map((img, index) => (
+              <div
+                key={index}
+                className="relative w-36 h-24 rounded-xl overflow-hidden group border border-slate-700"
+              >
+                <img
+                  src={`http://localhost:3000/uploads/${img}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+                />
 
-    return (
-      <div key={index} className="relative w-32 h-24">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      images: formData.images.filter((_, i) => i !== index),
+                    })
+                  }
+                  className="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        <img
-          src={previewUrl}
-          alt="new"
-          className="w-full h-full object-cover rounded-lg"
+        {/* NEW FILE INPUT */}
+        <input
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={(e) => {
+            const selectedFiles = Array.from(e.target.files);
+            setNewFiles((prev) => [...prev, ...selectedFiles]);
+          }}
+          className="input-pro"
         />
 
-        <button
-          type="button"
-          onClick={() =>
-            setNewFiles((prev) =>
-              prev.filter((_, i) => i !== index)
-            )
-          }
-          className="absolute top-1 right-1 bg-red-500 text-white px-2 py-1 text-xs rounded"
-        >
-          X
-        </button>
-
-      </div>
-    );
-  })}
-
-</div>
-
-
-        {/* New Images */}
-        <input
-  type="file"
-  multiple
-  accept="image/*"
-  onChange={(e) => {
-    const selectedFiles = Array.from(e.target.files);
-
-    setNewFiles((prev) => [...prev, ...selectedFiles]);
-  }}
-  className="border p-3 rounded"
-/>
-
-
+        {/* SUBMIT */}
         <button
           disabled={loading}
-          className="bg-blue-600 text-white p-3 rounded"
+          className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold text-lg shadow-lg hover:scale-[1.02] active:scale-[0.98] transition"
         >
-          {loading ? "Updating..." : "Update Listing"}
+          {loading ? "Updating..." : "🚀 Update Listing"}
         </button>
-
       </form>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default UpdateListing;
