@@ -12,8 +12,9 @@ import {
   signOutUserFailure,
 } from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
-import { Link, UNSAFE_RemixErrorBoundary } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -119,6 +120,7 @@ const Profile = () => {
     }
   };
 
+
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
@@ -148,12 +150,40 @@ const Profile = () => {
         return;
       }
 
+      
       setUserListings(data); // ✅ set array of listings
     } catch (error) {
       console.error(error);
       setShowListingsError("Something went wrong while fetching listings");
     }
   };
+  const handleDeleteListing = async (listingId) => {
+  try {
+
+    const confirmDelete = confirm("Delete this listing?");
+    if (!confirmDelete) return;
+
+    const res = await fetch(`/api/listing/delete/${listingId}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.log(data.message);
+      return;
+    }
+
+    // UI update
+    setUserListings((prev) =>
+      prev.filter((listing) => listing._id !== listingId)
+    );
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
   return (
@@ -348,9 +378,12 @@ const Profile = () => {
                       Edit
                     </button>
 
-                    <button className="text-red-600 font-semibold">
-                      Delete
-                    </button>
+                    <button
+  onClick={() => handleDeleteListing(listing._id)}
+  className="text-red-600 font-semibold"
+>
+  Delete
+</button>
                   </div>
                 </div>
               ))}

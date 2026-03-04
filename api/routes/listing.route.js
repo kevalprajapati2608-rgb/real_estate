@@ -17,7 +17,7 @@ router.put(
   upload.array("images", 6),
   updateListing
 );
-
+router.delete("/delete/:id", verifyToken, deleteListing);
 
 router.get("/:id", async (req, res) => {
   try {

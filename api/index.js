@@ -8,6 +8,10 @@ import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import adminRoutes from "./routes/admin.route.js";
+import paymentRoute from "./routes/payment.route.js";
+import feedbackRoutes from "./routes/feedback.route.js";
+import complaintRoutes from "./routes/complaint.route.js";
+import ratingRoutes from "./routes/rating.route.js";
 
 dotenv.config();
 const app = express();
@@ -32,8 +36,14 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 app.use("/api/admin", adminRoutes);
+app.use("/api/payment", paymentRoute);
+app.use("/api/feedback", feedbackRoutes);
+app.use("/api/complaints", complaintRoutes);
+app.use("/api/rating",ratingRoutes);
 
-
+console.log("EMAIL:", process.env.EMAIL);
+console.log("PASSWORD:", process.env.PASSWORD);
+console.log("PASSWORD LENGTH:", process.env.PASSWORD?.length);
 
 // MongoDB
 mongoose.connect(process.env.MONGO)

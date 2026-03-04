@@ -49,45 +49,154 @@ const SignUp = () => {
    
   };
 
-  return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          type="text"
-          placeholder="username"
-          className="bg-white border p-3 rounded-lg"
-          id="username"
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          className="bg-white border p-3 rounded-lg"
-          id="email"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="bg-white border p-3 rounded-lg"
-          id="password"
-          onChange={handleChange}
-        />
-        <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
-          {loading ? "Loading...0" : "Sign Up"}
+ return (
+  <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+    {/* Background Glow */}
+     <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_30%,rgba(99,102,241,0.4),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.4),transparent_40%),radial-gradient(circle_at_50%_50%,rgba(236,72,153,0.3),transparent_40%)]"></div>  
+
+    <div className="w-full max-w-md bg-white/70 dark:bg-slate-900/60
+    backdrop-blur-2xl border border-white/30 dark:border-slate-800
+    shadow-2xl rounded-3xl p-8 relative">
+
+      <h1 className="text-4xl font-bold text-center mb-8
+      text-slate-800 dark:text-white tracking-tight">
+        Create Account
+      </h1>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+
+        {/* Floating Username */}
+        <div className="relative">
+          <input
+            type="text"
+            id="username"
+            placeholder=" "
+            onChange={handleChange}
+            className="peer w-full px-4 pt-6 pb-2 bg-transparent
+            border border-slate-300 dark:border-slate-700
+            rounded-xl text-slate-800 dark:text-white
+            focus:outline-none focus:ring-2 focus:ring-indigo-500
+            transition-all duration-300"
+          />
+          <label
+            htmlFor="username"
+            className="absolute left-4 top-2 text-slate-500 dark:text-slate-400
+            text-sm transition-all duration-300
+            peer-placeholder-shown:top-4
+            peer-placeholder-shown:text-base
+            peer-placeholder-shown:text-slate-400
+            peer-focus:top-2
+            peer-focus:text-sm
+            peer-focus:text-indigo-500">
+            Username
+          </label>
+        </div>
+
+        {/* Floating Email */}
+        <div className="relative">
+          <input
+            type="email"
+            id="email"
+            placeholder=" "
+            onChange={handleChange}
+            className="peer w-full px-4 pt-6 pb-2 bg-transparent
+            border border-slate-300 dark:border-slate-700
+            rounded-xl text-slate-800 dark:text-white
+            focus:outline-none focus:ring-2 focus:ring-indigo-500
+            transition-all duration-300"
+          />
+          <label
+            htmlFor="email"
+            className="absolute left-4 top-2 text-slate-500 dark:text-slate-400
+            text-sm transition-all duration-300
+            peer-placeholder-shown:top-4
+            peer-placeholder-shown:text-base
+            peer-placeholder-shown:text-slate-400
+            peer-focus:top-2
+            peer-focus:text-sm
+            peer-focus:text-indigo-500">
+            Email Address
+          </label>
+        </div>
+
+        {/* Floating Password */}
+        <div className="relative">
+          <input
+            type="password"
+            id="password"
+            placeholder=" "
+            onChange={handleChange}
+            className="peer w-full px-4 pt-6 pb-2 bg-transparent
+            border border-slate-300 dark:border-slate-700
+            rounded-xl text-slate-800 dark:text-white
+            focus:outline-none focus:ring-2 focus:ring-indigo-500
+            transition-all duration-300"
+          />
+          <label
+            htmlFor="password"
+            className="absolute left-4 top-2 text-slate-500 dark:text-slate-400
+            text-sm transition-all duration-300
+            peer-placeholder-shown:top-4
+            peer-placeholder-shown:text-base
+            peer-placeholder-shown:text-slate-400
+            peer-focus:top-2
+            peer-focus:text-sm
+            peer-focus:text-indigo-500">
+            Password
+          </label>
+        </div>
+
+        {/* Sign Up Button */}
+        <button
+          disabled={loading}
+          className="bg-gradient-to-r from-indigo-600 to-purple-600
+          text-white font-semibold py-3 rounded-xl
+          shadow-lg hover:shadow-xl
+          hover:scale-[1.03]
+          active:scale-95
+          transition-all duration-300
+          disabled:opacity-70"
+        >
+          {loading ? "Loading..." : "Sign Up"}
         </button>
-        <OAuth />
+
+        {/* Divider */}
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-px bg-slate-300 dark:bg-slate-700"></div>
+          <span className="text-sm text-slate-500 dark:text-slate-400">
+            OR
+          </span>
+          <div className="flex-1 h-px bg-slate-300 dark:bg-slate-700"></div>
+        </div>
+
+        {/* OAuth */}
+        <div className="w-full">
+          <OAuth />
+        </div>
+
       </form>
-      <div className="flex gap-2 mt-5">
+
+      {/* Sign In Link */}
+      <div className="flex justify-center gap-2 mt-6 text-sm text-slate-600 dark:text-slate-400">
         <p>Have an account?</p>
         <Link to={"/sign-in"}>
-        <span className="text-blue-700">Sign In</span>
+          <span className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline cursor-pointer">
+            Sign In
+          </span>
         </Link>
       </div>
-      {error && <p className="text-red-500-m">{error}</p>}
+
+      {/* Error */}
+      {error && (
+        <p className="mt-5 text-sm text-center text-red-600 dark:text-red-400
+        bg-red-100 dark:bg-red-900/40 p-3 rounded-xl">
+          {error}
+        </p>
+      )}
     </div>
-  );
+  </div>
+);
 };
 
 export default SignUp;

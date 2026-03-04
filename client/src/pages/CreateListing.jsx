@@ -80,105 +80,197 @@ data.append("userRef", currentUser._id);
     }
   };
 
-  return (
-    <main className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">Create Listing</h1>
+return (
+  <main className="relative min-h-screen px-6 py-10 
+  bg-gradient-to-br from-slate-100 via-indigo-100 to-slate-200
+  dark:from-slate-950 dark:via-slate-900 dark:to-black
+  transition-colors duration-500">
 
-  {/* Message */}
+    {/* Glow Background */}
+    <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute w-[500px] h-[500px] bg-indigo-500/30 rounded-full blur-[120px] top-[-100px] left-[-100px]"></div>
+      <div className="absolute w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-[120px] bottom-[-100px] right-[-100px]"></div>
+    </div>
+
+    <div className="max-w-6xl mx-auto bg-white/70 dark:bg-slate-900/60
+    backdrop-blur-2xl border border-white/30 dark:border-slate-800
+    shadow-2xl rounded-3xl p-10">
+
+      <h1 className="text-4xl font-bold text-center mb-10
+      text-slate-800 dark:text-white tracking-tight">
+        Create Listing
+      </h1>
+
       {message && (
-        <div className="bg-green-200 text-green-800 p-3 rounded mb-4">
+        <div className="bg-green-100 dark:bg-green-900/40 
+        text-green-800 dark:text-green-300 
+        p-4 rounded-xl mb-6 text-center">
           {message}
         </div>
       )}
-      
-      <form className="flex flex-col sm:flex-row gap-6" onSubmit={handleSubmit}>
-        <div className="flex flex-col flex-1 gap-4">
-          <input type="text" placeholder="Name" id="name" onChange={handleChange} className="border p-3 rounded-lg" required />
-          <textarea placeholder="Description" id="description" onChange={handleChange} className="border p-3 rounded-lg" required />
-          <input type="text" placeholder="Address" id="address" onChange={handleChange} className="border p-3 rounded-lg" required />
 
-          <div className="flex gap-6 flex-wrap">
+      <form className="flex flex-col lg:flex-row gap-10" onSubmit={handleSubmit}>
+
+        {/* LEFT SECTION */}
+        <div className="flex flex-col flex-1 gap-6">
+
+          <input
+            type="text"
+            placeholder="Property Name"
+            id="name"
+            onChange={handleChange}
+            className="premium-input"
+            required
+          />
+
+          <textarea
+            placeholder="Property Description"
+            id="description"
+            onChange={handleChange}
+            className="premium-input min-h-[120px]"
+            required
+          />
+
+          <input
+            type="text"
+            placeholder="Address"
+            id="address"
+            onChange={handleChange}
+            className="premium-input"
+            required
+          />
+
+          {/* Checkboxes */}
+          <div className="flex flex-wrap gap-6">
             {["sale","rent","parking","furnished","offer"].map((field) => (
-              <label key={field} className="flex gap-2 items-center">
-                <input type="checkbox" id={field} onChange={handleChange} className="w-5" />
-                <span>{field.charAt(0).toUpperCase() + field.slice(1)}</span>
+              <label key={field} className="flex items-center gap-2 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  id={field}
+                  onChange={handleChange}
+                  className="w-5 h-5 accent-indigo-600"
+                />
+                <span className="text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 transition">
+                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                </span>
               </label>
             ))}
           </div>
 
-          <div className="flex gap-6">
-           <div> <p>Bed Rooms:</p><input type="number" placeholder="Bed Rooms" id="bedrooms" min="1" max="10" value={formData.bedrooms} onChange={handleChange} className="p-3 border rounded-lg" /></div>
-            <div><p>Bath Rooms</p><input type="number" placeholder="Bath Rooms" id="bathrooms" min="1" max="10" value={formData.bathrooms} onChange={handleChange} className="p-3 border rounded-lg" /></div>
-           <div> Reguler Price:
-            <input type="number" placeholder="Reguler Price" id="regularPrice" min="500000" value={formData.regularPrice} onChange={handleChange} className="p-3 border rounded-lg" /></div> 
-            <div>Discounte price<input type="number" id="discountPrice" min="0" value={formData.discountPrice} onChange={handleChange} className="p-3 border rounded-lg" />
+          {/* Numbers Section */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+            <div>
+              <p className="label">Bedrooms</p>
+              <input type="number" id="bedrooms" min="1" max="10"
+                value={formData.bedrooms}
+                onChange={handleChange}
+                className="premium-input" />
             </div>
+
+            <div>
+              <p className="label">Bathrooms</p>
+              <input type="number" id="bathrooms" min="1" max="10"
+                value={formData.bathrooms}
+                onChange={handleChange}
+                className="premium-input" />
             </div>
+
+            <div>
+              <p className="label">Regular Price</p>
+              <input type="number" id="regularPrice" min="500000"
+                value={formData.regularPrice}
+                onChange={handleChange}
+                className="premium-input" />
+            </div>
+
+            <div>
+              <p className="label">Discount Price</p>
+              <input type="number" id="discountPrice" min="0"
+                value={formData.discountPrice}
+                onChange={handleChange}
+                className="premium-input" />
+            </div>
+
+          </div>
+
         </div>
 
-        <div className="flex flex-col flex-1 gap-4">
-          <p className="font-semibold">
-            Images: <span className="font-normal text-gray-600 ml-2">The first image will be cover (max 6)</span>
+        {/* RIGHT SECTION */}
+        <div className="flex flex-col flex-1 gap-6">
+
+          <p className="font-semibold text-slate-700 dark:text-slate-300">
+            Images
+            <span className="text-sm font-normal text-slate-500 ml-2">
+              (First image will be cover • Max 6)
+            </span>
           </p>
-         <input
-  type="file"
-  multiple
-  accept="image/*"
-  onChange={(e) => {
-  const selectedFiles = Array.from(e.target.files);
 
-  setFiles((prevFiles) => {
-    const updatedFiles = [...prevFiles, ...selectedFiles];
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => {
+              const selectedFiles = Array.from(e.target.files);
+              setFiles((prevFiles) => {
+                const updatedFiles = [...prevFiles, ...selectedFiles];
+                if (updatedFiles.length > 6) {
+                  alert("Maximum 6 images allowed");
+                  return prevFiles;
+                }
+                return updatedFiles;
+              });
+            }}
+            className="premium-input cursor-pointer"
+          />
 
-    if (updatedFiles.length > 6) {
-      alert("Maximum 6 images allowed");
-      return prevFiles;
-    }
+          {/* Image Preview */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {files.map((file, index) => {
+              const previewUrl = URL.createObjectURL(file);
+              return (
+                <div key={index} className="relative group rounded-xl overflow-hidden shadow-md">
+                  <img
+                    src={previewUrl}
+                    alt="preview"
+                    className="w-full h-28 object-cover group-hover:scale-105 transition duration-300"
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFiles((prevFiles) =>
+                        prevFiles.filter((_, i) => i !== index)
+                      )
+                    }
+                    className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 
+                    text-white text-xs px-2 py-1 rounded-md shadow-md transition"
+                  >
+                    Remove
+                  </button>
+                </div>
+              );
+            })}
+          </div>
 
-    return updatedFiles;
-  });
-}}
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="mt-4 bg-gradient-to-r from-indigo-600 to-purple-600
+            text-white font-semibold py-3 rounded-xl
+            shadow-lg hover:shadow-xl
+            hover:scale-[1.02]
+            transition-all duration-300
+            disabled:opacity-70"
+          >
+            Create Listing
+          </button>
 
-  className="border p-3 rounded"
-/>
-<div className="flex flex-wrap gap-4 mt-4">
-  {files.map((file, index) => {
-    const previewUrl = URL.createObjectURL(file);
-
-    return (
-      <div key={index} className="relative w-32 h-24">
-
-        <img
-          src={previewUrl}
-          alt="preview"
-          className="w-full h-full object-cover rounded-lg"
-        />
-
-        <button
-          type="button"
-          onClick={() =>
-            setFiles((prevFiles) =>
-              prevFiles.filter((_, i) => i !== index)
-            )
-          }
-          className="absolute top-1 right-1 bg-red-500 text-white px-2 py-1 text-xs rounded"
-        >
-          X
-        </button>
-
-      </div>
-    );
-  })}
-</div>
-
-
-
-        
-          <button type="submit" className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 cursor-pointer">Create Listing</button>
         </div>
+
       </form>
-    </main>
-  );
+    </div>
+  </main>
+);
 };
 
 export default CreateListing;

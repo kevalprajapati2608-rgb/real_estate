@@ -12,6 +12,7 @@ import UpdateListing from "./components/UpdateListings";
 import ListingDetail from "./pages/ListingDetail";
 import AdminRoute from "./components/AdminRoute";
 import AdminDashboard from "./pages/AdminDashboard";
+import OtpPage from "./pages/OtpPage";
 
 const App = () => {
   return (
@@ -21,14 +22,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/about" element={<About />} />
+        
         <Route element={<PrivateRoute />}>
+        <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/my-listings" element={<MyListings />} />
           <Route path="/update-listing/:id" element={<UpdateListing />} />
-        </Route>
-        <Route path="/listing/:id" element={<ListingDetail />} />
+          <Route path="/listing/:id" element={<ListingDetail />} />
         <Route path="/update-listing/:id" element={<UpdateListing />} />
         <Route
         path="/admin"
@@ -38,6 +39,9 @@ const App = () => {
           </AdminRoute>
         }
       />
+      <Route path="/otp" element={<OtpPage />} />
+        </Route>
+        
       </Routes>
       
     </BrowserRouter>

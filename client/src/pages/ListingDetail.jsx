@@ -54,18 +54,18 @@ const ListingDetail = () => {
 
         {/* ================= HERO SECTION ================= */}
         <div className="relative rounded-3xl overflow-hidden">
-
+{(listing.isLocked || isLocked) && (
+  <div className="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-bold">
+    SOLD
+  </div>
+)}
           {/* Main Image */}
           <img
             src={`http://localhost:3000/uploads/${listing.images?.[activeIndex]}`}
             className="w-full h-[550px] object-cover cursor-pointer transition duration-500"
             onClick={() => setShowGallery(true)}
           />
-          {isLocked && (
-  <div className="absolute top-6 right-6 bg-red-600 text-white px-4 py-2 rounded-full font-bold shadow-xl animate-pulse">
-    🔒 LOCKED
-  </div>
-)}
+         
 
 
           {/* Gradient Overlay */}
@@ -185,12 +185,14 @@ const ListingDetail = () => {
   <p className="text-xs text-white/60 mt-1">
     Pay to reserve this property
   </p>
+  {!(listing.isLocked || isLocked) && (
   <button
-  onClick={() => setShowPayment(true)}
-  className="w-full mt-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white py-4 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg shadow-emerald-900/30"
->
-  🔒 Pay & Lock Property
-</button>
+    onClick={() => setShowPayment(true)}
+    className="w-full mt-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white py-4 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg shadow-emerald-900/30"
+  >
+    🔒 Pay & Lock Property
+  </button>
+)}
 
 
 </div>

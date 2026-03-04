@@ -90,7 +90,7 @@ const Home = () => {
           Find Your Dream Home
         </div>
       </div>
-
+      
       {/* FILTER — PREMIUM */}
 <div className="relative mb-12">
 
@@ -164,6 +164,7 @@ const Home = () => {
 
   </div>
 </div>
+
 
       {/* LISTINGS */}
       {/* LISTINGS */}

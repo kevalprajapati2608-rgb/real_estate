@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ReviewSection from "../components/ReviewSection";
+import Ratings from "../components/Ratings";
+import Feedback from "../components/Feedback";
+import Complaints from "../components/Complaints";
 
 /* 🔥 animated counter hook */
 const useCounter = (end, duration = 2000) => {
@@ -32,28 +36,77 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-100 to-purple-100 overflow-hidden">
-
       {/* ================= ULTRA HERO ================= */}
-      <div className="relative h-[480px] overflow-hidden">
+     <div className="relative h-[520px] overflow-hidden flex items-center justify-center">
 
-        {/* background glow */}
-        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-indigo-500/30 rounded-full blur-[120px]" />
-        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-[120px]" />
+  {/* background glow */}
+  <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-indigo-500/30 rounded-full blur-[140px]" />
+  <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-[140px]" />
 
-        <img
-          src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
-          className="w-full h-full object-cover"
-          alt="about"
-        />
+  {/* background image */}
+  <img
+    src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
+    className="absolute inset-0 w-full h-full object-cover scale-105"
+    alt="about"
+  />
 
-        <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center px-6 backdrop-blur-[2px]">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-xl">
-            Next-Gen Real Estate
-          </h1>
+  {/* gradient overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
 
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl">
-            Buy • Rent • Invest with confidence using our premium property platform.
-          </p>
+  {/* content */}
+  <div className="relative z-10 text-center text-white px-6 max-w-3xl">
+
+    <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-2xl tracking-tight">
+      Next-Gen Real Estate
+    </h1>
+
+    <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
+      Buy • Rent • Invest with confidence using our premium property platform.
+    </p>
+
+    {/* CTA buttons */}
+    <div className="flex gap-4 justify-center">
+     <Link to="/">
+      <button className="px-8 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 font-semibold shadow-xl hover:scale-105 transition">
+        Explore Properties
+      </button>
+      </Link>
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+      {/* ================= USER EXPERIENCE ================= */}
+
+      <div className="max-w-6xl mx-auto px-6 pb-20 text-center">
+
+  <h2 className="text-4xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+    User Experience
+  </h2>
+
+  <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full mb-6"></div>
+
+  <p className="text-gray-600 max-w-xl mx-auto">
+    We value your feedback and strive to improve your experience on our platform.
+  </p>
+
+</div>
+      {/*rating===Feedback===complaint */}
+      <div className="bg-white/60 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-12 max-w-6xl mx-auto">
+        {/* Rating */}
+        <div className="flex justify-center mb-12">
+          <div className="w-full md:w-1/2">
+            <Ratings />
+          </div>
+        </div>
+
+        {/* Feedback + Complaint */}
+        <div className="grid md:grid-cols-2 gap-10">
+          <Feedback />
+          <Complaints />
         </div>
       </div>
 
@@ -65,13 +118,13 @@ const About = () => {
           </h2>
 
           <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Our platform is built to revolutionize property discovery. We combine
-            powerful technology, beautiful design, and secure booking to create
-            the most seamless real estate experience possible.
+            Our platform is built to revolutionize property discovery. We
+            combine powerful technology, beautiful design, and secure booking to
+            create the most seamless real estate experience possible.
           </p>
         </div>
       </div>
-
+     
       {/* ================= FEATURES PRO ================= */}
       <div className="max-w-6xl mx-auto px-6 pb-20">
         <h2 className="text-3xl font-bold text-center mb-14">
@@ -79,7 +132,6 @@ const About = () => {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-10">
-
           {[
             {
               icon: "⚡",
@@ -114,11 +166,9 @@ const About = () => {
 
       {/* ================= LIVE STATS ================= */}
       <div className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-20 relative overflow-hidden">
-
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.15),transparent_60%)]" />
 
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center relative z-10">
-
           <div className="bg-white/10 backdrop-blur-xl p-8 rounded-3xl">
             <h3 className="text-5xl font-bold">{users.toLocaleString()}+</h3>
             <p className="text-white/80 mt-2">Happy Users</p>
@@ -133,37 +183,52 @@ const About = () => {
             <h3 className="text-5xl font-bold">{satisfaction}%</h3>
             <p className="text-white/80 mt-2">Client Satisfaction</p>
           </div>
-
         </div>
       </div>
 
       {/* ================= TEAM ================= */}
-      <div className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-bold text-center mb-14">
-          👑 Meet Our Team
-        </h2>
+      <div className="max-w-6xl mx-auto px-6 py-24">
 
-        <div className="grid md:grid-cols-3 gap-10">
+  {/* Title */}
+  <div className="text-center mb-16">
+    <h2 className="text-4xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+      Meet Our Team
+    </h2>
+    <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+  </div>
 
-          {[
-            { name: "Jaimin", role: "Founder" },
-            { name: "Baldev", role: "Founder" },
-            { name: "Mahavir", role: "Founder" },
-          ].map((m, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-3xl shadow-xl p-8 text-center hover:-translate-y-2 transition"
-            >
-              <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white text-2xl font-bold mb-4">
-                {m.name[0]}
-              </div>
+  <div className="grid md:grid-cols-3 gap-10">
 
-              <h3 className="text-xl font-bold">{m.name}</h3>
-              <p className="text-gray-500">{m.role}</p>
-            </div>
-          ))}
-        </div>
+    {[
+      { name: "Baldev", role: "Founder" },
+      { name: "Jaimin", role: "Founder", highlight: true },
+      { name: "Mahavir", role: "Founder" },
+    ].map((m, i) => (
+
+      <div
+        key={i}
+        className={`p-10 rounded-3xl text-center transition duration-500
+        ${m.highlight
+          ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white scale-105 shadow-2xl"
+          : "bg-white shadow-xl hover:-translate-y-2 hover:shadow-2xl"
+        }`}
+      >
+
+        <h3 className="text-2xl font-bold mb-2">
+          {m.name}
+        </h3>
+
+        <p className={`${m.highlight ? "text-white/90" : "text-gray-500"}`}>
+          {m.role}
+        </p>
+
       </div>
+
+    ))}
+
+  </div>
+
+</div>
 
       {/* ================= CTA ================= */}
       <div className="text-center py-20 px-6">
@@ -177,6 +242,7 @@ const About = () => {
           </button>
         </Link>
       </div>
+      
     </div>
   );
 };

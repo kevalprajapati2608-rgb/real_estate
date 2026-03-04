@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 const ListingCard = ({ listing }) => {
   return (
     <div className="border p-4 rounded shadow">
+      {listing.isLocked && (
+  <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded">
+    SOLD
+  </div>
+)}
       {/* 🔹 Listing Name */}
       <h2 className="text-xl font-bold">
         {listing.name}
@@ -24,6 +29,11 @@ const ListingCard = ({ listing }) => {
           Edit
         </button>
       </Link>
+      {!listing.isLocked && (
+  <button className="bg-indigo-600 text-white px-4 py-2 rounded">
+    Buy Property
+  </button>
+)}
     </div>
   );
 };

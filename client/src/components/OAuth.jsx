@@ -41,9 +41,28 @@ const OAuth = () => {
 
 
   return (
-    <button onClick={handleGoogleClick} type="button" className="bg-red-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
-        Continue with Google
-    </button>
+  <button
+  type="button"
+  onClick={handleGoogleClick}
+  className="w-full flex items-center justify-center gap-3
+  px-4 py-3
+  bg-white dark:bg-slate-800
+  text-slate-700 dark:text-white
+  border border-slate-300 dark:border-slate-700
+  rounded-xl
+  shadow-sm hover:shadow-md
+  hover:bg-slate-50 dark:hover:bg-slate-700
+  transition-all duration-300"
+>
+  <img
+    src="https://www.svgrepo.com/show/475656/google-color.svg"
+    alt="google"
+    className="w-5 h-5"
+  />
+  <span className="font-medium">
+    Continue with Google
+  </span>
+</button>
   )
 }
 
